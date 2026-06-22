@@ -438,6 +438,14 @@ const toiletingEdges = [
   { from: 'q3_b2', to: 'B-H', label: "2~4점 (장해)", condition: (ans: any) => parseInt(ans['q3_b2'] || '-1') >= 2 },
 ];
 
+const getShortOptionText = (text: string) => {
+  if (text.includes('사용 편의성')) return '사용 편의';
+  if (text.includes('비용 절감')) return '비용 절감';
+  if (text.includes('공사 과정 최소화')) return '공사 최소';
+  const parts = text.split(/[:;,]/);
+  return parts[0].trim();
+};
+
 export default function AlgorithmRunner({ algorithm, mode, onPathChange, onLearnMore }: AlgorithmRunnerProps) {
   const [currentQuestionId, setCurrentQuestionId] = useState<string | null>(algorithm.startQuestionId);
   const [answers, setAnswers] = useState<Record<string, any>>({});
@@ -833,7 +841,7 @@ export default function AlgorithmRunner({ algorithm, mode, onPathChange, onLearn
                                 }}
                                 className="flex-1 text-[8px] sm:text-[9px] font-extrabold px-1 py-0.5 rounded bg-primary/5 border border-primary/20 text-primary hover:bg-primary hover:text-white transition-all text-center whitespace-nowrap"
                               >
-                                {opt.text.split(':')[0].trim()}
+                                {getShortOptionText(opt.text)}
                               </button>
                             ))
                           ) : (
@@ -858,7 +866,8 @@ export default function AlgorithmRunner({ algorithm, mode, onPathChange, onLearn
                             const q = algorithm.questions[id];
                             if (!q) return '';
                             if (q.type === 'single') {
-                              return q.options.find(o => o.value === ans)?.text.split(':')[0].trim();
+                              const matchedOpt = q.options.find(o => o.value === ans);
+                              return matchedOpt ? getShortOptionText(matchedOpt.text) : '';
                             } else if (Array.isArray(ans)) {
                               return `${ans.length}개 조건 선택됨`;
                             }
