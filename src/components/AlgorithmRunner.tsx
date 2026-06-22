@@ -321,38 +321,38 @@ const learningGuides: Record<string, { title: string; content: string; details: 
 
 // Node positioning and styling configurations
 const transferNodes: Record<string, { x: number; y: number; label: string; isResult?: boolean; typeLabel: string }> = {
-  q1: { x: 380, y: 20, label: "자리이동에 어려움이 있나요?", typeLabel: "기능평가" },
-  'T-A': { x: 20, y: 150, label: "도움 불필요", isResult: true, typeLabel: "기기 추천" },
-  'T-B': { x: 200, y: 150, label: "이승보조장비", isResult: true, typeLabel: "기기 추천" },
-  q2: { x: 560, y: 150, label: "체중을 스스로 지탱할 수 없는가?", typeLabel: "하지 근력" },
-  q3: { x: 470, y: 280, label: "사용자의 환경은 어떤가요?", typeLabel: "설치 환경" },
-  q4: { x: 740, y: 280, label: "상체를 스스로 일으킬 수 있나요?", typeLabel: "상체 조절" },
-  q3_1: { x: 300, y: 410, label: "우선순위가 어떻게 되나요?", typeLabel: "가치 선별" },
-  q3_2: { x: 470, y: 410, label: "독립 지지대 설치가 가능한가요?", typeLabel: "공사 평가" },
-  'T-C': { x: 630, y: 410, label: "전동형 기립보조리프트", isResult: true, typeLabel: "기기 추천" },
-  'T-D': { x: 790, y: 410, label: "비전동형 기립보조기기", isResult: true, typeLabel: "기기 추천" },
-  'T-E': { x: 100, y: 540, label: "천장 고정형 리프트", isResult: true, typeLabel: "기기 추천" },
-  'T-F': { x: 270, y: 540, label: "벽 고정형 리프트", isResult: true, typeLabel: "기기 추천" },
-  'T-G': { x: 440, y: 540, label: "이동식 리프트", isResult: true, typeLabel: "기기 추천" },
-  'T-H': { x: 610, y: 540, label: "이동식 겐트리 리프트", isResult: true, typeLabel: "기기 추천" },
+  q1: { x: 415, y: 20, label: "자리이동에 어려움이 있나요?", typeLabel: "기능평가" },
+  'T-A': { x: 20, y: 180, label: "도움 불필요", isResult: true, typeLabel: "기기 추천" },
+  'T-B': { x: 210, y: 180, label: "이승보조장비", isResult: true, typeLabel: "기기 추천" },
+  q2: { x: 620, y: 180, label: "체중을 스스로 지탱할 수 없는가?", typeLabel: "하지 근력" },
+  q3: { x: 420, y: 340, label: "사용자의 환경은 어떤가요?", typeLabel: "설치 환경" },
+  q4: { x: 780, y: 340, label: "상체를 스스로 일으킬 수 있나요?", typeLabel: "상체 조절" },
+  q3_1: { x: 200, y: 500, label: "우선순위가 어떻게 되나요?", typeLabel: "가치 선별" },
+  'T-C': { x: 620, y: 500, label: "전동형 기립보조리프트", isResult: true, typeLabel: "기기 추천" },
+  'T-D': { x: 810, y: 500, label: "비전동형 기립보조기기", isResult: true, typeLabel: "기기 추천" },
+  'T-E': { x: 20, y: 660, label: "천장 고정형 리프트", isResult: true, typeLabel: "기기 추천" },
+  'T-F': { x: 200, y: 660, label: "벽 고정형 리프트", isResult: true, typeLabel: "기기 추천" },
+  q3_2: { x: 420, y: 660, label: "독립 지지대 설치가 가능한가요?", typeLabel: "공사 평가" },
+  'T-G': { x: 320, y: 820, label: "이동식 리프트", isResult: true, typeLabel: "기기 추천" },
+  'T-H': { x: 520, y: 820, label: "이동식 겐트리 리프트", isResult: true, typeLabel: "기기 추천" },
 };
 
 const toiletingNodes: Record<string, { x: number; y: number; label: string; isResult?: boolean; typeLabel: string }> = {
-  q1: { x: 408, y: 20, label: "배설 인지 조절에 어려움이 있나요?", typeLabel: "인지 평가" },
-  q2_a: { x: 168, y: 150, label: "화장실 이동에 어려움이 있나요? (A)", typeLabel: "이동 평가" },
-  q2_b: { x: 648, y: 150, label: "화장실 이동에 어려움이 있나요? (B)", typeLabel: "이동 평가" },
-  q3_a1: { x: 48, y: 280, label: "스스로 뒤처리를 할 수 있나요? (A1)", typeLabel: "뒤처리 평가" },
-  q3_a2: { x: 288, y: 280, label: "스스로 뒤처리를 할 수 있나요? (A2)", typeLabel: "뒤처리 평가" },
-  q3_b1: { x: 528, y: 280, label: "스스로 뒤처리를 할 수 있나요? (B1)", typeLabel: "뒤처리 평가" },
-  q3_b2: { x: 768, y: 280, label: "스스로 뒤처리를 할 수 있나요? (B2)", typeLabel: "뒤처리 평가" },
-  'B-A': { x: 10, y: 420, label: "도움 불필요", isResult: true, typeLabel: "기기 추천" },
-  'B-B': { x: 130, y: 420, label: "비데", isResult: true, typeLabel: "기기 추천" },
-  'B-C': { x: 250, y: 420, label: "변기 리프트", isResult: true, typeLabel: "기기 추천" },
-  'B-D': { x: 370, y: 420, label: "이동 변기", isResult: true, typeLabel: "기기 추천" },
-  'B-E': { x: 490, y: 420, label: "배설 유도 프로그램", isResult: true, typeLabel: "기기 추천" },
-  'B-F': { x: 610, y: 420, label: "배설 프로그램 + 비데", isResult: true, typeLabel: "기기 추천" },
-  'B-G': { x: 730, y: 420, label: "자동배설로봇 (간헐)", isResult: true, typeLabel: "기기 추천" },
-  'B-H': { x: 850, y: 420, label: "스마트 기저귀 로봇", isResult: true, typeLabel: "기기 추천" },
+  q1: { x: 415, y: 20, label: "배설 인지 조절에 어려움이 있나요?", typeLabel: "인지 평가" },
+  q2_a: { x: 200, y: 180, label: "화장실 이동에 어려움이 있나요? (A)", typeLabel: "이동 평가" },
+  q2_b: { x: 630, y: 180, label: "화장실 이동에 어려움이 있나요? (B)", typeLabel: "이동 평가" },
+  q3_a1: { x: 80, y: 340, label: "스스로 뒤처리를 할 수 있나요? (A1)", typeLabel: "뒤처리 평가" },
+  q3_a2: { x: 290, y: 340, label: "스스로 뒤처리를 할 수 있나요? (A2)", typeLabel: "뒤처리 평가" },
+  q3_b1: { x: 540, y: 340, label: "스스로 뒤처리를 할 수 있나요? (B1)", typeLabel: "뒤처리 평가" },
+  q3_b2: { x: 750, y: 340, label: "스스로 뒤처리를 할 수 있나요? (B2)", typeLabel: "뒤처리 평가" },
+  'B-A': { x: 10, y: 500, label: "도움 불필요", isResult: true, typeLabel: "기기 추천" },
+  'B-B': { x: 135, y: 500, label: "비데", isResult: true, typeLabel: "기기 추천" },
+  'B-C': { x: 260, y: 500, label: "변기 리프트", isResult: true, typeLabel: "기기 추천" },
+  'B-D': { x: 385, y: 500, label: "이동 변기", isResult: true, typeLabel: "기기 추천" },
+  'B-E': { x: 505, y: 500, label: "배설 유도 프로그램", isResult: true, typeLabel: "기기 추천" },
+  'B-F': { x: 630, y: 500, label: "배설 프로그램 + 비데", isResult: true, typeLabel: "기기 추천" },
+  'B-G': { x: 755, y: 500, label: "자동배설로봇 (간헐)", isResult: true, typeLabel: "기기 추천" },
+  'B-H': { x: 880, y: 500, label: "스마트 기저귀 로봇", isResult: true, typeLabel: "기기 추천" },
 };
 
 const transferEdges = [
@@ -618,10 +618,14 @@ export default function AlgorithmRunner({ algorithm, mode, onPathChange, onLearn
 
   // Node dimensions config
   const getNodeWidth = (id: string) => {
-    if (!isTransfer && id.startsWith('B-')) return 106; // toileting results are slightly slimmer
-    return 160;
+    if (!isTransfer && id.startsWith('B-')) return 110; // toileting results are slightly slimmer
+    return 170; // increased from 160 to prevent text wrapping/overflow
   };
-  const getNodeHeight = () => 84;
+  const getNodeHeight = (id: string) => {
+    const node = nodes[id];
+    if (node?.isResult) return 76;
+    return 96; // increased from 84 for questions to fit titles and quick-action/selected badges comfortably
+  };
 
   // Path Bezier curve calculation
   const getBezierPath = (x1: number, y1: number, x2: number, y2: number) => {
@@ -678,8 +682,8 @@ export default function AlgorithmRunner({ algorithm, mode, onPathChange, onLearn
             <div 
               className="relative mx-auto select-none"
               style={{ 
-                width: isTransfer ? '960px' : '960px', 
-                height: isTransfer ? '650px' : '520px' 
+                width: '1000px', 
+                height: isTransfer ? '920px' : '600px' 
               }}
             >
               {/* SVG Layer for Drawing Bezier Curves */}
@@ -690,7 +694,7 @@ export default function AlgorithmRunner({ algorithm, mode, onPathChange, onLearn
                   if (!fromNode || !toNode) return null;
 
                   const parentW = getNodeWidth(edge.from);
-                  const parentH = getNodeHeight();
+                  const parentH = getNodeHeight(edge.from);
                   const childW = getNodeWidth(edge.to);
 
                   // Port coordinates (Bottom Center to Top Center)
@@ -722,7 +726,7 @@ export default function AlgorithmRunner({ algorithm, mode, onPathChange, onLearn
                   if (!fromNode || !toNode) return null;
 
                   const parentW = getNodeWidth(edge.from);
-                  const parentH = getNodeHeight();
+                  const parentH = getNodeHeight(edge.from);
                   const childW = getNodeWidth(edge.to);
 
                   const startX = fromNode.x + parentW / 2;
@@ -764,7 +768,7 @@ export default function AlgorithmRunner({ algorithm, mode, onPathChange, onLearn
                 {Object.entries(nodes).map(([id, node]) => {
                   const status = getNodeStatus(id);
                   const nodeW = getNodeWidth(id);
-                  const nodeH = getNodeHeight();
+                  const nodeH = getNodeHeight(id);
 
                   const isActive = status === 'active';
                   const isCompleted = status === 'completed';
