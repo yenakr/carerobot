@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { BookOpen, GitMerge, FileText, CheckSquare, Shield, ArrowRight, CheckCircle2, ChevronRight, ChevronLeft } from 'lucide-react';
+import { BookOpen, GitMerge, CheckSquare, Shield, ArrowRight, CheckCircle2, ChevronRight, ChevronLeft } from 'lucide-react';
 
 // Data imports
 import { toiletingCareAlgorithm } from '@/data/algorithms/toiletingCare';
@@ -14,9 +14,8 @@ import AlgorithmRunner from '@/components/AlgorithmRunner';
 import AlgorithmFlowchart from '@/components/AlgorithmFlowchart';
 
 export default function ToiletingPage() {
-  const [activeTab, setActiveTab] = useState<'info' | 'devices' | 'learning' | 'assessment' | 'quiz'>('info');
+  const [activeTab, setActiveTab] = useState<'info' | 'devices' | 'learning' | 'quiz'>('info');
   const [learningPath, setLearningPath] = useState<string[]>([]);
-  const [assessmentPath, setAssessmentPath] = useState<string[]>([]);
 
   // Quiz state
   const [quizIndex, setQuizIndex] = useState(0);
@@ -29,11 +28,10 @@ export default function ToiletingPage() {
     { id: 'info', name: '소개 & 평가기준', icon: BookOpen },
     { id: 'devices', name: '배설기기 종류', icon: Shield },
     { id: 'learning', name: '알고리즘 학습', icon: GitMerge },
-    { id: 'assessment', name: '나의 맞춤 자가평가', icon: FileText },
     { id: 'quiz', name: '사례 테스트 (퀴즈)', icon: CheckSquare },
   ] as const;
 
-  const tabOrder = ['info', 'devices', 'learning', 'assessment', 'quiz'] as const;
+  const tabOrder = ['info', 'devices', 'learning', 'quiz'] as const;
   const currentIdx = tabOrder.indexOf(activeTab);
 
   const handlePrevTab = () => {
@@ -190,9 +188,10 @@ export default function ToiletingPage() {
                   const imgPath = isRobot ? '/images/excretion_robot.png' : '/images/toilet_lift.png';
                   return (
                     <div key={device.id} className="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden flex flex-col justify-between hover:shadow-md transition-shadow duration-200">
-                      <div className="p-6">
-                        <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 items-start">
-                          <div className="sm:col-span-4 relative aspect-square rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center p-2">
+                      <div className="p-5 sm:p-6">
+                        <div className="flex flex-col sm:flex-row gap-6 items-center sm:items-start">
+                          {/* Device Image - Responsively constrained size */}
+                          <div className="relative w-32 h-32 sm:w-36 sm:h-36 shrink-0 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center p-2">
                             <Image
                               src={imgPath}
                               alt={device.name}
@@ -201,7 +200,8 @@ export default function ToiletingPage() {
                             />
                           </div>
                           
-                          <div className="sm:col-span-8 space-y-3">
+                          {/* Device Info */}
+                          <div className="flex-1 space-y-3 text-center sm:text-left">
                             <div>
                               <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-500 uppercase">
                                 {device.category}
@@ -219,7 +219,7 @@ export default function ToiletingPage() {
                           <p className="text-sm text-slate-600 leading-relaxed font-semibold">
                             {device.description}
                           </p>
-                          <div className="mt-4 flex flex-wrap gap-1.5">
+                          <div className="mt-4 flex flex-wrap gap-1.5 justify-center sm:justify-start">
                             {device.features.map((f, idx) => (
                               <span key={idx} className="text-xs bg-slate-100 text-slate-600 font-semibold px-2.5 py-1 rounded-md">
                                 {f}
@@ -266,27 +266,7 @@ export default function ToiletingPage() {
             </div>
           )}
 
-          {/* Tab 4: 맞춤 자가평가 */}
-          {activeTab === 'assessment' && (
-            <div className="max-w-3xl mx-auto w-full py-4 animate-fade-in">
-              <div className="bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm mb-6 text-center space-y-3">
-                <h2 className="text-2xl font-bold text-slate-800">
-                  자가평가
-                </h2>
-                <p className="text-sm text-slate-500 max-w-xl mx-auto leading-relaxed font-semibold">
-                  배설 지각과 이동, 뒤처리 상태를 진단하여 가장 적합한 보조기기 및 로봇 유형을 확인합니다.
-                </p>
-              </div>
-              
-              <AlgorithmRunner
-                algorithm={toiletingCareAlgorithm}
-                mode="self-assessment"
-                onPathChange={(path) => setAssessmentPath(path)}
-              />
-            </div>
-          )}
-
-          {/* Tab 5: 사례 테스트 */}
+          {/* Tab 4: 사례 테스트 */}
           {activeTab === 'quiz' && (
             <div className="max-w-3xl mx-auto w-full py-4 animate-fade-in">
               {!quizFinished ? (

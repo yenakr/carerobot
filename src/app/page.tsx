@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowRight, BookOpen, GitMerge, FileCheck, HelpCircle, Trophy } from 'lucide-react';
+import { ArrowRight, BookOpen, GitMerge, HelpCircle, Trophy } from 'lucide-react';
 
 export default function Home() {
   const steps = [
@@ -12,28 +12,21 @@ export default function Home() {
     },
     {
       step: 2,
-      title: '알고리즘 구조 이해',
-      description: '기기 유형을 선별하는 의사결정 흐름을 살펴봅니다.',
+      title: '알고리즘 학습',
+      description: '시뮬레이션을 통해 판별 흐름을 살펴봅니다.',
       icon: GitMerge,
       color: 'bg-indigo-50 text-indigo-600 border-indigo-100',
     },
     {
       step: 3,
-      title: '맞춤형 자가평가',
-      description: '신체 조건과 환경 문답을 통해 자가 진단을 수행합니다.',
-      icon: FileCheck,
-      color: 'bg-sky-50 text-sky-600 border-sky-100',
-    },
-    {
-      step: 4,
       title: '사례 기반 테스트',
       description: '퀴즈를 풀며 알고리즘 이해도를 높입니다.',
       icon: HelpCircle,
       color: 'bg-amber-50 text-amber-600 border-amber-100',
     },
     {
-      step: 5,
-      title: '결과 및 해설 확인',
+      step: 4,
+      title: '결과 확인',
       description: '매칭 결과와 이유를 확인합니다.',
       icon: Trophy,
       color: 'bg-emerald-50 text-emerald-600 border-emerald-100',
@@ -77,7 +70,7 @@ export default function Home() {
         <div className="lg:col-span-5 space-y-4">
           <span className="text-xs font-bold text-primary uppercase tracking-wider font-semibold">ABOUT</span>
           <h2 className="text-3xl font-extrabold text-slate-800 tracking-tight leading-tight">
-            플랫폼 소개
+            소개
           </h2>
           <div className="h-1.5 w-16 bg-primary rounded" />
           <p className="text-slate-600 text-sm sm:text-base leading-relaxed pt-2 font-medium">
@@ -101,7 +94,7 @@ export default function Home() {
 
           <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow duration-200 space-y-4">
             <div className="bg-primary/5 text-primary p-3 rounded-xl w-fit">
-              <FileCheck className="w-6 h-6" />
+              <FileCheckIcon className="w-6 h-6 text-primary" />
             </div>
             <h3 className="text-lg font-bold text-slate-800">배설돌봄</h3>
             <p className="text-sm text-slate-500 leading-relaxed font-medium">
@@ -120,11 +113,11 @@ export default function Home() {
           <div className="text-center max-w-3xl mx-auto space-y-3 mb-12 sm:mb-16">
             <span className="text-xs font-bold text-primary uppercase tracking-wider font-semibold">PROCESS</span>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-800 tracking-tight">
-              이용 흐름
+              Process
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {steps.map((item) => {
               const Icon = item.icon;
               return (
@@ -148,5 +141,27 @@ export default function Home() {
         </div>
       </section>
     </div>
+  );
+}
+
+// Simple local FileCheckIcon component
+function FileCheckIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+      <polyline points="14 2 14 8 20 8" />
+      <polyline points="9 15 11 17 15 13" />
+    </svg>
   );
 }

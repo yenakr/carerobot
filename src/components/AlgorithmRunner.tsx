@@ -350,9 +350,9 @@ export default function AlgorithmRunner({ algorithm, mode, onPathChange }: Algor
               {/* Product Layout */}
               <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start mb-8">
                 {/* Visual Section */}
-                <div className="md:col-span-5 flex flex-col items-center">
+                <div className="md:col-span-5 flex flex-col items-center justify-center">
                   {getDeviceImage(resultId) ? (
-                    <div className="relative w-full aspect-square rounded-xl overflow-hidden bg-slate-50 border border-slate-100 flex items-center justify-center p-4">
+                    <div className="relative w-full max-w-[240px] md:max-w-none aspect-square rounded-xl overflow-hidden bg-slate-50 border border-slate-100 flex items-center justify-center p-4">
                       <Image
                         src={getDeviceImage(resultId)}
                         alt={algorithm.results[resultId]?.title || 'Device Image'}
@@ -362,7 +362,7 @@ export default function AlgorithmRunner({ algorithm, mode, onPathChange }: Algor
                       />
                     </div>
                   ) : (
-                    <div className="w-full aspect-square rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center">
+                    <div className="w-full max-w-[240px] md:max-w-none aspect-square rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center">
                       <span className="text-slate-300 text-sm">추천 이미지 준비 중</span>
                     </div>
                   )}
@@ -370,6 +370,7 @@ export default function AlgorithmRunner({ algorithm, mode, onPathChange }: Algor
                     * 위 이미지는 사용자의 선택 결과를 시각화하기 위해 AI로 생성된 예시 모델입니다.
                   </span>
                 </div>
+
 
                 {/* Information Section */}
                 <div className="md:col-span-7 space-y-5">

@@ -50,13 +50,19 @@ export default function AlgorithmFlowchart({ algorithmId, activePath }: Algorith
 
   if (algorithmId === 'transfer') {
     return (
-      <div className="w-full bg-slate-50 rounded-2xl border border-slate-200/60 p-4 sm:p-6 overflow-x-auto">
-        <h4 className="text-sm font-bold text-slate-500 mb-6 flex items-center gap-1.5">
-          <HelpCircle className="w-4 h-4 text-primary" />
-          이승돌봄 의사결정 알고리즘 지도 (실시간 응답 흐름 시각화)
-        </h4>
+      <div className="w-full bg-slate-50 rounded-2xl border border-slate-200/60 p-4 sm:p-6 overflow-x-auto relative">
+        <div className="flex justify-between items-center mb-6">
+          <h4 className="text-sm font-bold text-slate-500 flex items-center gap-1.5">
+            <HelpCircle className="w-4 h-4 text-primary" />
+            이승돌봄 의사결정 알고리즘 지도
+          </h4>
+          <span className="lg:hidden text-[10px] font-bold text-slate-400 bg-slate-200/50 px-2 py-0.5 rounded animate-pulse">
+            ← 드래그하여 스크롤 →
+          </span>
+        </div>
 
         <div className="min-w-[700px] flex flex-col items-center py-4 space-y-4">
+
           
           {/* ROOT QUESTION */}
           <div className="w-80 flex flex-col items-center">
@@ -171,13 +177,19 @@ export default function AlgorithmFlowchart({ algorithmId, activePath }: Algorith
 
   // Toileting Care Flowchart
   return (
-    <div className="w-full bg-slate-50 rounded-2xl border border-slate-200/60 p-4 sm:p-6 overflow-x-auto">
-      <h4 className="text-sm font-bold text-slate-500 mb-6 flex items-center gap-1.5">
-        <HelpCircle className="w-4 h-4 text-primary" />
-        배설돌봄 의사결정 알고리즘 지도 (실시간 응답 흐름 시각화)
-      </h4>
+    <div className="w-full bg-slate-50 rounded-2xl border border-slate-200/60 p-4 sm:p-6 overflow-x-auto relative">
+      <div className="flex justify-between items-center mb-6">
+        <h4 className="text-sm font-bold text-slate-500 flex items-center gap-1.5">
+          <HelpCircle className="w-4 h-4 text-primary" />
+          배설돌봄 의사결정 알고리즘 지도
+        </h4>
+        <span className="lg:hidden text-[10px] font-bold text-slate-400 bg-slate-200/50 px-2 py-0.5 rounded animate-pulse">
+          ← 드래그하여 스크롤 →
+        </span>
+      </div>
 
       <div className="min-w-[850px] flex flex-col items-center py-4 space-y-4">
+
         
         {/* ROOT QUESTION */}
         <div className="w-80 flex flex-col items-center">
