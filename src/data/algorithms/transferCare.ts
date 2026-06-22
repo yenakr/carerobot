@@ -152,12 +152,12 @@ export const transferCareAlgorithm = {
     } as Question,
     q4: {
       id: 'q4',
-      title: '스스로 상체를 일으킬 수 있나요?',
+      title: '스스로 상체를 일으킬 수 없는가?',
       description: '',
       type: 'single',
       options: [
-        { id: 'q4_yes', text: '가능하다', value: 'yes' },
-        { id: 'q4_no', text: '어렵다', value: 'no' },
+        { id: 'q4_yes', text: '예, 상체를 일으킬 수 없음', value: 'yes' },
+        { id: 'q4_no', text: '아니오, 상체를 일으킬 수 있음', value: 'no' },
       ],
       resultId: (answers: Record<string, any>) => {
         const val = answers['q4'];

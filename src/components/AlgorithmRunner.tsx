@@ -255,8 +255,8 @@ const learningGuides: Record<string, { title: string; content: string; details: 
     title: '상체 조절 능력 평가',
     content: '다리 지지는 힘드나 상체 잔존 근력이 있어 등받이 벨트를 파지하고 로봇과 협조하여 상체를 버틸 수 있는지 확인합니다.',
     details: [
-      { key: '가능하다', val: '스스로 잡고 일어서는 속도를 돕는 전동형 기립보조리프트 추천' },
-      { key: '어렵다', val: '더 많은 신체 고정과 보조가 이루어지는 비전동형 기립보조기기 추천' }
+      { key: '예, 상체를 일으킬 수 없음', val: '스스로 잡고 일어서는 속도를 돕는 전동형 기립보조리프트 추천' },
+      { key: '아니오, 상체를 일으킬 수 있음', val: '더 많은 신체 고정과 보조가 이루어지는 비전동형 기립보조기기 추천' }
     ]
   },
   
@@ -325,14 +325,14 @@ const transferNodes: Record<string, { x: number; y: number; label: string; isRes
   'T-A': { x: 20, y: 180, label: "도움 불필요", isResult: true, typeLabel: "기기 추천" },
   'T-B': { x: 210, y: 180, label: "이승보조장비", isResult: true, typeLabel: "기기 추천" },
   q2: { x: 620, y: 180, label: "체중을 스스로 지탱할 수 없는가?", typeLabel: "하지 근력" },
-  q3: { x: 420, y: 340, label: "사용자의 환경은 어떤가요?", typeLabel: "설치 환경" },
-  q4: { x: 780, y: 340, label: "상체를 스스로 일으킬 수 있나요?", typeLabel: "상체 조절" },
-  q3_1: { x: 200, y: 500, label: "우선순위가 어떻게 되나요?", typeLabel: "가치 선별" },
-  'T-C': { x: 620, y: 500, label: "전동형 기립보조리프트", isResult: true, typeLabel: "기기 추천" },
-  'T-D': { x: 810, y: 500, label: "비전동형 기립보조기기", isResult: true, typeLabel: "기기 추천" },
-  'T-E': { x: 20, y: 660, label: "천장 고정형 리프트", isResult: true, typeLabel: "기기 추천" },
-  'T-F': { x: 200, y: 660, label: "벽 고정형 리프트", isResult: true, typeLabel: "기기 추천" },
+  q4: { x: 420, y: 340, label: "스스로 상체를 일으킬 수 없는가?", typeLabel: "상체 조절" },
+  q3: { x: 780, y: 340, label: "사용자의 환경은 어떤가요?", typeLabel: "설치 환경" },
+  'T-C': { x: 320, y: 500, label: "전동형 기립보조리프트", isResult: true, typeLabel: "기기 추천" },
+  'T-D': { x: 520, y: 500, label: "비전동형 기립보조기기", isResult: true, typeLabel: "기기 추천" },
+  q3_1: { x: 780, y: 500, label: "우선순위가 어떻게 되나요?", typeLabel: "가치 선별" },
   q3_2: { x: 420, y: 660, label: "독립 지지대 설치가 가능한가요?", typeLabel: "공사 평가" },
+  'T-E': { x: 620, y: 660, label: "천장 고정형 리프트", isResult: true, typeLabel: "기기 추천" },
+  'T-F': { x: 810, y: 660, label: "벽 고정형 리프트", isResult: true, typeLabel: "기기 추천" },
   'T-G': { x: 320, y: 820, label: "이동식 리프트", isResult: true, typeLabel: "기기 추천" },
   'T-H': { x: 520, y: 820, label: "이동식 겐트리 리프트", isResult: true, typeLabel: "기기 추천" },
 };
@@ -359,8 +359,8 @@ const transferEdges = [
   { from: 'q1', to: 'T-A', label: "0점", condition: (ans: any) => ans['q1'] === '0' },
   { from: 'q1', to: 'T-B', label: "1점", condition: (ans: any) => ans['q1'] === '1' },
   { from: 'q1', to: 'q2', label: "2점 이상", condition: (ans: any) => parseInt(ans['q1'] || '-1') >= 2 },
-  { from: 'q2', to: 'q3', label: "체중 지탱 불가", condition: (ans: any) => ans['q2'] === 'yes' },
-  { from: 'q2', to: 'q4', label: "체중 지탱 가능", condition: (ans: any) => ans['q2'] === 'no' },
+  { from: 'q2', to: 'q3', label: "예 (지탱 불가)", condition: (ans: any) => ans['q2'] === 'yes' },
+  { from: 'q2', to: 'q4', label: "아니오 (지탱 가능)", condition: (ans: any) => ans['q2'] === 'no' },
   { 
     from: 'q3', 
     to: 'q3_1', 
@@ -417,8 +417,8 @@ const transferEdges = [
   { from: 'q3_1', to: 'q3_2', label: "공사 최소", condition: (ans: any) => ans['q3_1'] === 'minimal' },
   { from: 'q3_2', to: 'T-H', label: "프레임 가능", condition: (ans: any) => ans['q3_2'] === 'yes' },
   { from: 'q3_2', to: 'T-G', label: "프레임 불가", condition: (ans: any) => ans['q3_2'] === 'no' },
-  { from: 'q4', to: 'T-C', label: "상체 지탱 가능", condition: (ans: any) => ans['q4'] === 'yes' },
-  { from: 'q4', to: 'T-D', label: "상체 지탱 불가", condition: (ans: any) => ans['q4'] === 'no' },
+  { from: 'q4', to: 'T-C', label: "예", condition: (ans: any) => ans['q4'] === 'yes' },
+  { from: 'q4', to: 'T-D', label: "아니오", condition: (ans: any) => ans['q4'] === 'no' },
 ];
 
 const toiletingEdges = [
