@@ -73,7 +73,7 @@ export default function Home() {
             </h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Card 1: 자세히 알아보기 */}
+              {/* Card 1: 전문가 추천 */}
               <div
                 onClick={() => selectMode('detail')}
                 className={`cursor-pointer p-5 rounded-xl border-2 text-left transition-all duration-300 relative group flex flex-col justify-between ${
@@ -92,10 +92,10 @@ export default function Home() {
                     <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${
                       mode === 'detail' ? 'bg-primary/10 text-primary' : 'bg-white/10 text-white/90'
                     }`}>
-                      전문가 대상
+                      상세 정보 확인
                     </span>
                   </div>
-                  <h3 className="text-base sm:text-lg font-black tracking-tight mb-2">자세히 알아보기</h3>
+                  <h3 className="text-base sm:text-lg font-black tracking-tight mb-2">전문가 추천</h3>
                   <p className={`text-xs leading-relaxed font-semibold ${
                     mode === 'detail' ? 'text-slate-600' : 'text-slate-200'
                   }`}>
@@ -109,7 +109,7 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Card 2: 간단히 알아보기 */}
+              {/* Card 2: 돌봄대상자 추천 */}
               <div
                 onClick={() => selectMode('simple')}
                 className={`cursor-pointer p-5 rounded-xl border-2 text-left transition-all duration-300 relative group flex flex-col justify-between ${
@@ -128,10 +128,10 @@ export default function Home() {
                     <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${
                       mode === 'simple' ? 'bg-primary/10 text-primary' : 'bg-white/10 text-white/90'
                     }`}>
-                      돌봄제공자 대상
+                      쉬운 설명 위주
                     </span>
                   </div>
-                  <h3 className="text-base sm:text-lg font-black tracking-tight mb-2">간단히 알아보기</h3>
+                  <h3 className="text-base sm:text-lg font-black tracking-tight mb-2">돌봄대상자 추천</h3>
                   <p className={`text-xs leading-relaxed font-semibold ${
                     mode === 'simple' ? 'text-slate-600' : 'text-slate-200'
                   }`}>

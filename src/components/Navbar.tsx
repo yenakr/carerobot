@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Heart, Settings } from 'lucide-react';
+import { Heart } from 'lucide-react';
 
 export default function Navbar() {
   const [mode, setMode] = useState<'detail' | 'simple'>('detail');
@@ -33,8 +33,8 @@ export default function Navbar() {
     };
   }, []);
 
-  const handleToggleMode = () => {
-    const nextMode = mode === 'detail' ? 'simple' : 'detail';
+  const handleSetMode = (nextMode: 'detail' | 'simple') => {
+    if (mode === nextMode) return;
     setMode(nextMode);
     localStorage.setItem('care-mode', nextMode);
     
@@ -67,25 +67,29 @@ export default function Navbar() {
           </div>
 
           {mounted && (
-            <div className="flex items-center gap-3">
-              {/* Mode indicator badge */}
-              <span className={`text-[10px] sm:text-xs font-bold px-2 py-1 rounded-full border ${
-                mode === 'detail'
-                  ? 'bg-blue-50 text-primary border-blue-200'
-                  : 'bg-amber-50 text-amber-700 border-amber-200'
-              }`}>
-                {mode === 'detail' ? '자세히 알아보기' : '간단히 알아보기'}
-              </span>
-
-              {/* Minimal toggle button */}
-              <button
-                onClick={handleToggleMode}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100 hover:text-slate-800 transition-all font-bold text-xs cursor-pointer shadow-sm"
-                title="보기 방식 전환"
-              >
-                <Settings className="w-3.5 h-3.5" />
-                <span>모드 전환</span>
-              </button>
+            <div className="flex items-center">
+              <div className="bg-slate-100 p-0.5 flex rounded-full border border-slate-200/60 shadow-inner">
+                <button
+                  onClick={() => handleSetMode('detail')}
+                  className={`px-3 py-1.5 rounded-full text-xs font-black transition-all duration-200 cursor-pointer ${
+                    mode === 'detail'
+                      ? 'bg-primary text-white shadow-sm'
+                      : 'text-slate-500 hover:text-slate-800'
+                  }`}
+                >
+                  전문가 추천
+                </button>
+                <button
+                  onClick={() => handleSetMode('simple')}
+                  className={`px-3 py-1.5 rounded-full text-xs font-black transition-all duration-200 cursor-pointer ${
+                    mode === 'simple'
+                      ? 'bg-primary text-white shadow-sm'
+                      : 'text-slate-500 hover:text-slate-800'
+                  }`}
+                >
+                  돌봄대상자 추천
+                </button>
+              </div>
             </div>
           )}
         </div>

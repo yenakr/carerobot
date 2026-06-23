@@ -9,6 +9,7 @@ import '@xyflow/react/dist/style.css';
 interface Option {
   id: string;
   text: string;
+  simpleText?: string;
   score?: number;
   value: string;
 }
@@ -16,6 +17,7 @@ interface Option {
 interface Question {
   id: string;
   title: string;
+  simpleTitle?: string;
   description?: string;
   simpleDescription?: string;
   type: 'single' | 'multi';
@@ -27,9 +29,13 @@ interface Question {
 interface Result {
   id: string;
   title: string;
+  simpleTitle?: string;
   description: string;
+  simpleDescription?: string;
   recommendation: string;
+  simpleRecommendation?: string;
   reason: string;
+  simpleReason?: string;
   simpleResultSummary?: string;
   simpleTips?: string[];
 }
@@ -563,6 +569,21 @@ const CustomNode = ({ data }: { data: any }) => {
   );
 };
 
+export function getDisplayText<T extends Record<string, any>>(
+  item: T | null | undefined,
+  field: keyof T,
+  uiMode: 'simple' | 'detail'
+): string {
+  if (!item) return '';
+  if (uiMode === 'simple') {
+    const simpleField = `simple${String(field).charAt(0).toUpperCase()}${String(field).slice(1)}`;
+    if (item[simpleField] !== undefined) {
+      return String(item[simpleField]);
+    }
+  }
+  return String(item[field] || '');
+}
+
 export default function AlgorithmRunner({ algorithm, mode, uiMode = 'detail', onPathChange, onLearnMore }: AlgorithmRunnerProps) {
   const [currentQuestionId, setCurrentQuestionId] = useState<string | null>(algorithm.startQuestionId);
   const [answers, setAnswers] = useState<Record<string, any>>({});
@@ -793,48 +814,50 @@ export default function AlgorithmRunner({ algorithm, mode, uiMode = 'detail', on
 
   // Render Simple UI Mode (Single Card Wizard)
   if (uiMode === 'simple') {
+    const prog = (() => {
+      const questionId = currentQuestionId;
+      if (!questionId) return { current: 0, total: 1 };
+      const transferProgress: Record<string, { current: number; total: number }> = {
+        q1: { current: 1, total: 4 },
+        q2: { current: 2, total: 4 },
+        q3: { current: 3, total: 4 },
+        q4: { current: 3, total: 4 },
+        q3_1: { current: 4, total: 4 },
+        q3_2: { current: 4, total: 4 }
+      };
+      const toiletingProgress: Record<string, { current: number; total: number }> = {
+        q1: { current: 1, total: 3 },
+        q2_a: { current: 2, total: 3 },
+        q2_b: { current: 2, total: 3 },
+        q3_a1: { current: 3, total: 3 },
+        q3_a2: { current: 3, total: 3 },
+        q3_b1: { current: 3, total: 3 },
+        q3_b2: { current: 3, total: 3 }
+      };
+      
+      if (questionId in transferProgress) return transferProgress[questionId];
+      if (questionId in toiletingProgress) return toiletingProgress[questionId];
+      return { current: history.length + 1, total: history.length + 1 };
+    })();
+
     return (
       <div className="w-full max-w-2xl mx-auto space-y-6">
-        {/* Simple Progress Bar */}
-        <div className="flex justify-between items-center bg-white border border-slate-200 rounded-2xl px-5 py-3.5 shadow-sm">
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-black text-amber-700 bg-amber-50 px-2.5 py-1 rounded-full border border-amber-200 tracking-wide">
-              {resultId ? '진단 완료' : `단계 ${history.length + 1}`}
-            </span>
-            <span className="text-xs font-bold text-slate-500">
-              {resultId ? '나의 추천 결과를 확인하세요' : '아래 질문에 답해 주세요'}
-            </span>
-          </div>
-          <button
-            onClick={handleReset}
-            className="px-3.5 py-1.5 text-xs font-bold text-slate-500 hover:text-red-500 hover:bg-red-50 hover:border-red-200 border border-slate-200 bg-white rounded-xl shadow-sm transition-all flex items-center gap-1 cursor-pointer"
-          >
-            <RotateCcw className="w-3.5 h-3.5" />
-            <span>처음부터 다시</span>
-          </button>
-        </div>
-
         {/* Wizard Main Card */}
         {resultId ? (
           // Matched Recommendation screen
           <div className="bg-white rounded-3xl border border-slate-200 shadow-md overflow-hidden animate-fade-in flex flex-col">
-            <div className="bg-primary px-6 py-5 text-white">
-              <span className="text-xs font-black text-white/80 uppercase tracking-widest block mb-0.5">매칭 추천 결과</span>
-              <h3 className="font-extrabold text-lg sm:text-xl leading-tight">나에게 맞는 추천 기기</h3>
-            </div>
-
             <div className="p-6 sm:p-8 space-y-6">
               {/* Result Title */}
               <div className="text-center pb-5 border-b border-slate-100 space-y-2">
                 <span className="text-xs font-black text-primary bg-primary/10 px-3 py-1 rounded-full border border-primary/20">
-                  추천 장치
+                  추천 결과
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-black text-slate-800 pt-1 tracking-tight leading-snug">
-                  {resultDetails[resultId]?.deviceName || algorithm.results[resultId]?.title}
+                  {getDisplayText(algorithm.results[resultId], 'title', uiMode)}
                 </h2>
                 {resultDetails[resultId]?.deviceName && (
                   <span className="text-sm font-semibold text-slate-400 block pt-1">
-                    ({algorithm.results[resultId]?.title})
+                    ({resultDetails[resultId]?.deviceName})
                   </span>
                 )}
               </div>
@@ -865,6 +888,15 @@ export default function AlgorithmRunner({ algorithm, mode, uiMode = 'detail', on
                   </p>
                 </div>
 
+                {algorithm.results[resultId]?.simpleRecommendation && (
+                  <div className="bg-blue-50/40 p-4 sm:p-5 rounded-2xl border border-blue-200/50">
+                    <h4 className="text-xs font-black text-blue-500 uppercase tracking-wider block mb-2">추천 활용 방향</h4>
+                    <p className="text-slate-700 font-bold leading-relaxed text-sm sm:text-base">
+                      {algorithm.results[resultId]?.simpleRecommendation}
+                    </p>
+                  </div>
+                )}
+
                 {/* simpleTips warning list */}
                 {algorithm.results[resultId]?.simpleTips && (
                   <div className="bg-amber-50/50 border border-amber-200 rounded-2xl p-5 space-y-3">
@@ -886,7 +918,7 @@ export default function AlgorithmRunner({ algorithm, mode, uiMode = 'detail', on
                 {onLearnMore && (
                   <button
                     onClick={() => onLearnMore(resultId)}
-                    className="flex-1 py-4 rounded-xl bg-primary hover:bg-primary-dark text-white font-extrabold text-sm shadow-md transition-all flex items-center justify-center gap-1.5 hover:shadow-lg cursor-pointer"
+                    className="flex-1 py-3.5 rounded-xl bg-primary hover:bg-primary-dark text-white font-extrabold text-sm shadow-md transition-all flex items-center justify-center gap-1.5 hover:shadow-lg cursor-pointer"
                   >
                     <span>상세 기기 정보 더 알아보기</span>
                     <ArrowRight className="w-4 h-4" />
@@ -894,7 +926,7 @@ export default function AlgorithmRunner({ algorithm, mode, uiMode = 'detail', on
                 )}
                 <button
                   onClick={handleReset}
-                  className="py-4 px-6 rounded-xl border border-slate-200 text-slate-500 hover:bg-slate-50 hover:text-slate-700 font-bold text-sm transition-colors cursor-pointer"
+                  className="py-3.5 px-6 rounded-xl border border-slate-200 text-slate-500 hover:bg-slate-50 hover:text-slate-700 font-bold text-sm transition-colors cursor-pointer"
                 >
                   처음부터 다시 진단하기
                 </button>
@@ -905,17 +937,27 @@ export default function AlgorithmRunner({ algorithm, mode, uiMode = 'detail', on
           // Question card
           currentQuestion && (
             <div className="bg-white rounded-3xl border border-slate-200 shadow-md p-6 sm:p-8 space-y-6 animate-fade-in flex flex-col text-left">
-              {/* Question title & simpleDescription */}
-              <div className="space-y-3">
-                <span className="text-xs font-black text-primary bg-primary/10 px-2.5 py-1 rounded-full border border-primary/20 inline-block">
-                  질문 {history.length + 1}
+              {/* Progress Bar & indicator */}
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex-1 bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                  <div 
+                    className="bg-primary h-full transition-all duration-300"
+                    style={{ width: `${(prog.current / prog.total) * 100}%` }}
+                  />
+                </div>
+                <span className="text-xs font-bold text-slate-400 shrink-0">
+                  {prog.current} / {prog.total}
                 </span>
+              </div>
+
+              {/* Question title & description */}
+              <div className="space-y-3">
                 <h3 className="text-xl sm:text-2xl font-black text-slate-800 leading-snug">
-                  {currentQuestion.title}
+                  {getDisplayText(currentQuestion, 'title', uiMode)}
                 </h3>
-                {currentQuestion.simpleDescription && (
-                  <p className="text-sm sm:text-base text-slate-500 leading-relaxed font-bold bg-slate-50 p-4 rounded-xl border border-slate-100">
-                    💡 {currentQuestion.simpleDescription}
+                {getDisplayText(currentQuestion, 'description', uiMode) && (
+                  <p className="text-sm sm:text-base text-slate-500 leading-relaxed font-bold bg-slate-50 p-4 rounded-xl border border-slate-100/60">
+                    💡 {getDisplayText(currentQuestion, 'description', uiMode)}
                   </p>
                 )}
               </div>
@@ -929,10 +971,12 @@ export default function AlgorithmRunner({ algorithm, mode, uiMode = 'detail', on
                       <button
                         key={opt.id}
                         onClick={() => handleSingleSelect(currentQuestion.id, opt.value)}
-                        className="w-full text-left p-4 sm:p-5 rounded-2xl border-2 border-slate-200 hover:border-primary hover:bg-primary/5 transition-all flex flex-col justify-between items-start group font-bold text-slate-800 cursor-pointer shadow-sm"
+                        className="w-full text-left p-4 sm:p-5 rounded-2xl border-2 border-slate-200 hover:border-primary hover:bg-primary/5 transition-all flex flex-col justify-between items-start group font-bold text-slate-800 cursor-pointer shadow-sm animate-fade-in"
                       >
                         <div className="flex w-full justify-between items-center gap-2">
-                          <span className="text-base sm:text-lg">{opt.text}</span>
+                          <span className="text-base sm:text-lg">
+                            {getDisplayText(opt, 'text', uiMode)}
+                          </span>
                           <div className="w-5 h-5 rounded-full border-2 border-slate-300 flex items-center justify-center group-hover:border-primary group-hover:bg-primary transition-all shrink-0">
                             <div className="w-2.5 h-2.5 rounded-full bg-white scale-0 group-hover:scale-100 transition-transform" />
                           </div>
@@ -969,7 +1013,9 @@ export default function AlgorithmRunner({ algorithm, mode, uiMode = 'detail', on
                               }`}>
                                 {isChecked && <Check className="w-3.5 h-3.5 stroke-[3]" />}
                               </div>
-                              <span className="text-base sm:text-lg leading-snug">{opt.text}</span>
+                              <span className="text-base sm:text-lg leading-snug">
+                                {getDisplayText(opt, 'text', uiMode)}
+                              </span>
                             </div>
                           </div>
                           {detailText && (
@@ -986,7 +1032,7 @@ export default function AlgorithmRunner({ algorithm, mode, uiMode = 'detail', on
                   <button
                     onClick={() => handleMultiSubmit(currentQuestion.id)}
                     disabled={tempMultiSelect.length === 0}
-                    className="w-full py-4 rounded-xl bg-primary text-white font-extrabold text-sm hover:bg-primary-dark transition-all flex items-center justify-center gap-1.5 shadow-md disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                    className="w-full py-3.5 rounded-xl bg-primary text-white font-extrabold text-sm hover:bg-primary-dark transition-all flex items-center justify-center gap-1.5 shadow-md disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                   >
                     <span>선택 완료하고 다음 질문으로</span>
                     <ArrowRight className="w-4 h-4" />
@@ -995,22 +1041,23 @@ export default function AlgorithmRunner({ algorithm, mode, uiMode = 'detail', on
               )}
 
               {/* Navigation Back / Reset */}
-              <div className="flex justify-between items-center pt-6 border-t border-slate-100">
+              <div className="flex justify-between items-center pt-5 border-t border-slate-100">
                 {history.length > 0 ? (
                   <button
                     onClick={handlePrevQuestion}
-                    className="px-5 py-2.5 rounded-xl border border-slate-300 hover:bg-slate-50 text-slate-600 hover:text-slate-800 font-bold text-xs sm:text-sm transition-all flex items-center gap-1 cursor-pointer"
+                    className="px-3 py-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-slate-500 hover:text-slate-700 transition-colors font-medium text-xs cursor-pointer flex items-center gap-1"
                   >
-                    <ChevronLeft className="w-4 h-4" />
-                    <span>이전 질문으로</span>
+                    <ChevronLeft className="w-3.5 h-3.5" />
+                    <span>이전 질문</span>
                   </button>
                 ) : <div />}
                 
                 <button
                   onClick={handleReset}
-                  className="px-5 py-2.5 rounded-xl text-slate-400 hover:text-red-500 font-bold text-xs sm:text-sm transition-all cursor-pointer"
+                  className="px-3 py-1.5 rounded-lg border border-slate-200 bg-white hover:bg-red-50 hover:text-red-600 text-slate-400 hover:border-red-100 transition-colors font-medium text-xs cursor-pointer flex items-center gap-1"
                 >
-                  자가진단 처음부터 다시 하기
+                  <RotateCcw className="w-3 h-3" />
+                  <span>처음부터 다시</span>
                 </button>
               </div>
             </div>

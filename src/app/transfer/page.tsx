@@ -168,11 +168,6 @@ export default function TransferPage() {
         <h1 className={`font-extrabold text-slate-800 tracking-tight ${isSimple ? 'text-4xl' : 'text-3xl'}`}>
           이승돌봄기기
         </h1>
-        {isSimple && (
-          <span className="text-xs font-bold text-amber-700 bg-amber-50 border border-amber-200 px-3 py-1 rounded-full w-fit">
-            💡 글씨가 크게 활성화된 돌봄제공자 모드입니다.
-          </span>
-        )}
       </div>
 
       {/* Tabs Navigation */}
@@ -687,7 +682,7 @@ export default function TransferPage() {
                     </div>
 
                     {isQuizSubmitted && (
-                      <div className="mt-6 p-5 rounded-xl border border-sky-100 bg-sky-50/50 space-y-2 animate-fade-in">
+                      <div className="mt-6 p-5 rounded-xl border border-slate-200/80 bg-white shadow-sm space-y-2 animate-fade-in">
                         <h4 className="text-sm font-bold text-slate-800 flex items-center gap-2 font-semibold">
                           <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
                           <span>정답 해설 ({selectedQuizOption === transferCases[quizIndex].correctAnswerIndex ? '정답입니다!' : '오답입니다.'})</span>
