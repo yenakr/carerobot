@@ -58,18 +58,18 @@ export default function SimpleRobotCard({
         {/* Usage & Safety Details Grid */}
         <div className="grid grid-cols-1 gap-5 pt-2">
           {/* When to use */}
-          <div className="bg-slate-50 border border-slate-150 rounded-2xl p-5 space-y-2">
+          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-2">
             <h4 className="text-base font-black text-slate-800 flex items-center gap-1.5 uppercase">
               <ShieldCheck className="w-5 h-5 text-indigo-600 shrink-0" />
               이럴 때 사용해요
             </h4>
-            <p className="text-base sm:text-lg text-slate-650 leading-relaxed font-semibold">
+            <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-semibold">
               <HighlightText text={whenToUse} />
             </p>
           </div>
 
           {/* Precautions */}
-          <div className="bg-orange-50/50 border border-orange-150 rounded-2xl p-5 space-y-2">
+          <div className="bg-orange-50/50 border border-orange-200 rounded-2xl p-5 space-y-2">
             <h4 className="text-base font-black text-orange-950 flex items-center gap-1.5 uppercase">
               <AlertTriangle className="w-5 h-5 text-orange-600 shrink-0" />
               조심하세요
@@ -96,11 +96,11 @@ export default function SimpleRobotCard({
         </button>
 
         {isDetailedOpen && (
-          <div className="p-6 bg-slate-50/30 border-t border-slate-150 space-y-6 animate-fade-in text-sm sm:text-base font-semibold text-slate-600">
+          <div className="p-6 bg-slate-50/30 border-t border-slate-200 space-y-6 animate-fade-in text-sm sm:text-base font-semibold text-slate-600">
             {/* Category and Target */}
-            <div className="space-y-3 border-b border-slate-150 pb-5">
+            <div className="space-y-3 border-b border-slate-200 pb-5">
               <div>
-                <span className="text-xs font-black px-3 py-1 rounded bg-indigo-50 border border-indigo-150 text-indigo-700 uppercase tracking-wider">
+                <span className="text-xs font-black px-3 py-1 rounded bg-indigo-50 border border-indigo-200 text-indigo-700 uppercase tracking-wider">
                   분류: {category}
                 </span>
               </div>

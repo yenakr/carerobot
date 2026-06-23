@@ -29,7 +29,7 @@ export default function SafetyCheckCard({ items }: SafetyCheckCardProps) {
         );
       case 'obstacle':
         return (
-          <div className="p-3 bg-slate-100 text-slate-650 rounded-xl border border-slate-200 shadow-sm shrink-0">
+          <div className="p-3 bg-slate-100 text-slate-600 rounded-xl border border-slate-200 shadow-sm shrink-0">
             <ShieldAlert className="w-5 h-5 stroke-[2.5]" />
           </div>
         );

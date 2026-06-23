@@ -277,7 +277,7 @@ export default function TransferPage() {
                       <span className="w-2.5 h-6 bg-indigo-600 rounded-full inline-block" />
                       자리이동(이승) 돌봄이란?
                     </h2>
-                    <p className="text-base sm:text-lg text-slate-650 leading-relaxed font-semibold">
+                    <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-semibold">
                       스스로 다른 자리로 옮겨 앉기 어려울 때, 침대·의자·휠체어·변기 등으로 안전하게 이동하도록 돕는 돌봄입니다.
                     </p>
                   </div>
@@ -351,7 +351,7 @@ export default function TransferPage() {
                             <div>
                               <div className="flex justify-between items-center mb-3">
                                 <span className={`text-xs font-bold px-2.5 py-1 rounded-lg ${
-                                  isHighlight ? 'bg-primary text-white' : 'bg-slate-100 text-slate-650'
+                                  isHighlight ? 'bg-primary text-white' : 'bg-slate-100 text-slate-600'
                                 }`}>
                                   {item.score}
                                 </span>

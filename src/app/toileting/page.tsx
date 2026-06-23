@@ -271,7 +271,7 @@ export default function ToiletingPage() {
                       <span className="w-2.5 h-6 bg-indigo-600 rounded-full inline-block" />
                       배설돌봄(화장실 및 위생)이란?
                     </h2>
-                    <p className="text-base sm:text-lg text-slate-650 leading-relaxed font-semibold">
+                    <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-semibold">
                       스스로 화장실을 이용하거나 대소변 후 청결을 유지하기 어려운 대상자를 위해 이동, 자세 유지, 용변 후 뒤처리 및 기저귀 위생 등을 돕는 돌봄입니다.
                     </p>
                   </div>
@@ -344,7 +344,7 @@ export default function ToiletingPage() {
                             <div>
                               <div className="flex justify-between items-center mb-3">
                                 <span className={`text-xs font-bold px-2.5 py-1 rounded-lg ${
-                                  isHighlight ? 'bg-primary text-white' : 'bg-slate-100 text-slate-650'
+                                  isHighlight ? 'bg-primary text-white' : 'bg-slate-100 text-slate-600'
                                 }`}>
                                   {item.score}
                                 </span>

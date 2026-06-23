@@ -35,6 +35,16 @@ interface RobotStorySectionProps {
   onCTAChangeTab: () => void;
 }
 
+export default function RobotStorySection({
+  scenariosTitle,
+  scenarios,
+  helpersTitle,
+  helpers,
+  robots,
+  safetyTips,
+  onCTAChangeTab,
+}: RobotStorySectionProps) {
+
   const getTheme = (idx: number) => {
     const safeNum = (idx % 4) + 1;
     switch (safeNum) {
@@ -42,7 +52,7 @@ interface RobotStorySectionProps {
         return {
           bg: 'bg-purple-50/40',
           border: 'border-purple-200/80',
-          badgeBg: 'bg-purple-650',
+          badgeBg: 'bg-purple-600',
           sideBorder: 'border-l-4 border-l-purple-600',
           illustBg: 'bg-purple-100/50'
         };
@@ -58,7 +68,7 @@ interface RobotStorySectionProps {
         return {
           bg: 'bg-teal-50/40',
           border: 'border-teal-200/80',
-          badgeBg: 'bg-teal-650',
+          badgeBg: 'bg-teal-600',
           sideBorder: 'border-l-4 border-l-teal-600',
           illustBg: 'bg-teal-100/50'
         };
@@ -106,7 +116,7 @@ interface RobotStorySectionProps {
                     </span>
                     {sc.title}
                   </h4>
-                  <p className="text-base text-slate-650 font-semibold leading-relaxed">
+                  <p className="text-base text-slate-600 font-semibold leading-relaxed">
                     <HighlightText text={sc.description} />
                   </p>
                 </div>
@@ -127,9 +137,9 @@ interface RobotStorySectionProps {
           {helpers.map((help, idx) => (
             <li 
               key={idx} 
-              className="flex items-center gap-2.5 bg-white border border-slate-150 p-4 rounded-2xl shadow-sm hover:translate-x-0.5 transition-transform"
+              className="flex items-center gap-2.5 bg-white border border-slate-200 p-4 rounded-2xl shadow-sm hover:translate-x-0.5 transition-transform"
             >
-              <div className="w-2 h-2 rounded-full bg-indigo-650 shrink-0" />
+              <div className="w-2 h-2 rounded-full bg-indigo-600 shrink-0" />
               <span className="text-base sm:text-lg text-slate-700 leading-relaxed font-bold">
                 <HighlightText text={help} />
               </span>

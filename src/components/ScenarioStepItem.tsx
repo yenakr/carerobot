@@ -32,7 +32,7 @@ export default function ScenarioStepItem({ number, type, title, description }: S
         return {
           bg: 'bg-teal-50/40',
           border: 'border-teal-200/80',
-          badgeBg: 'bg-teal-650',
+          badgeBg: 'bg-teal-600',
           sideBorder: 'border-l-4 border-l-teal-600',
           illustBg: 'bg-teal-100/50'
         };
