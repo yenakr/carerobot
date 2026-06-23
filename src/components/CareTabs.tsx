@@ -29,15 +29,15 @@ export default function CareTabs({ tabs, activeTab, onChange, isSimple = false }
             onClick={() => onChange(tab.id)}
             role="tab"
             aria-selected={isActive}
-            className={`flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-bold whitespace-nowrap transition-all cursor-pointer flex-1 text-center border-none select-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${
-              isSimple ? 'text-base' : 'text-sm'
+            className={`flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl transition-all cursor-pointer flex-1 text-center border-none select-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${
+              isSimple ? 'text-lg font-black' : 'text-sm font-bold'
             } ${
               isActive
-                ? 'bg-indigo-600 text-white shadow-md'
-                : 'text-slate-600 hover:text-slate-800 hover:bg-white/50'
+                ? 'bg-indigo-700 text-white shadow-md font-black ring-2 ring-indigo-300 ring-offset-1'
+                : 'text-slate-600 hover:text-slate-800 hover:bg-white/50 font-bold'
             }`}
           >
-            <Icon className={`w-4 h-4 shrink-0 transition-transform duration-200 ${isActive ? 'scale-110' : ''}`} />
+            <Icon className={`w-5 h-5 shrink-0 transition-transform duration-200 ${isActive ? 'scale-110 stroke-[3]' : 'stroke-[2]'}`} />
             <span>{tab.name}</span>
           </button>
         );

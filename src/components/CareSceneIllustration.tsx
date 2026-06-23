@@ -1,8 +1,4 @@
 import React from 'react';
-import { 
-  Bed, Accessibility, Users, Shield, ArrowRight, AlertTriangle, 
-  Lock, Footprints, Droplet, EyeOff, Trash2, Heart, Check, Smile
-} from 'lucide-react';
 
 export type IllustrationType = 
   | 'bed-to-wheelchair'
@@ -29,340 +25,333 @@ export default function CareSceneIllustration({ type, size = 'md' }: CareSceneIl
   const getDimensionClass = () => {
     switch (size) {
       case 'sm':
-        return 'h-24 w-full';
+        return 'h-28 w-full max-w-sm mx-auto';
       case 'lg':
-        return 'h-48 w-full';
+        return 'h-52 w-full max-w-lg mx-auto';
       case 'md':
       default:
-        return 'h-36 w-full';
+        return 'h-40 w-full max-w-md mx-auto';
     }
   };
 
-  const renderScene = () => {
+  const renderSVG = () => {
     switch (type) {
       case 'bed-to-wheelchair':
         return (
-          <div className="relative w-full h-full bg-gradient-to-br from-blue-50/70 to-indigo-50/70 rounded-2xl border border-slate-100 overflow-hidden flex flex-col justify-end">
-            <div className="flex items-end justify-between px-10 pb-4 relative z-10">
-              <div className="flex flex-col items-center gap-1.5">
-                <div className="p-3 bg-blue-600 text-white rounded-xl shadow-md border border-blue-500 transform hover:scale-105 transition-transform">
-                  <Bed className="w-6 h-6" />
-                </div>
-                <span className="text-[10px] font-black text-blue-700 bg-blue-50 border border-blue-200/50 px-2 py-0.5 rounded shadow-sm">침대</span>
-              </div>
-              
-              <div className="flex flex-col items-center gap-1 pb-3">
-                <div className="flex items-center text-indigo-600 animate-pulse">
-                  <div className="w-10 h-0.5 bg-indigo-300" />
-                  <ArrowRight className="-ml-2 w-4 h-4 stroke-[3]" />
-                </div>
-                <span className="text-[9px] font-black text-slate-400">이동</span>
-              </div>
-
-              <div className="flex flex-col items-center gap-1.5">
-                <div className="p-3 bg-indigo-600 text-white rounded-xl shadow-md border border-indigo-500 transform hover:scale-105 transition-transform">
-                  <Accessibility className="w-6 h-6" />
-                </div>
-                <span className="text-[10px] font-black text-indigo-700 bg-indigo-50 border border-indigo-200/50 px-2 py-0.5 rounded shadow-sm">휠체어</span>
-              </div>
-            </div>
-            <div className="w-full h-1.5 bg-slate-300/80" />
-          </div>
+          <svg className="w-full h-full" viewBox="0 0 240 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="bg-btw" x1="0" y1="0" x2="240" y2="120" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#F5F3FF" />
+                <stop offset="1" stopColor="#EDE9FE" />
+              </linearGradient>
+            </defs>
+            <rect width="240" height="120" rx="20" fill="url(#bg-btw)" />
+            {/* Bed on the left */}
+            <rect x="25" y="65" width="60" height="30" rx="4" fill="#93C5FD" />
+            <rect x="25" y="60" width="15" height="8" rx="2" fill="#DBEAFE" />
+            <path d="M40 55 C48 55, 48 65, 60 65 L85 65 L85 75 L40 75 Z" fill="#60A5FA" />
+            <rect x="30" y="95" width="6" height="10" fill="#4B5563" />
+            <rect x="74" y="95" width="6" height="10" fill="#4B5563" />
+            {/* Arrow in middle */}
+            <path d="M105 70 H130 M124 64 L131 70 L124 76" stroke="#6366F1" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+            <text x="118" y="52" fill="#4F46E5" fontSize="10" fontWeight="900" textAnchor="middle">이동</text>
+            {/* Wheelchair on the right */}
+            <circle cx="170" cy="85" r="16" stroke="#4B5563" strokeWidth="4" />
+            <circle cx="170" cy="85" r="10" stroke="#9CA3AF" strokeWidth="2" />
+            <path d="M152 50 H165 V78 H182" stroke="#374151" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+            {/* Person sitting in wheelchair */}
+            <circle cx="165" cy="38" r="6" fill="#818CF8" />
+            <path d="M165 44 C172 44, 176 50, 176 58 L170 70" stroke="#818CF8" strokeWidth="4" strokeLinecap="round" />
+            <circle cx="190" cy="92" r="5" fill="#4B5563" />
+          </svg>
         );
 
       case 'wheelchair-to-bed':
         return (
-          <div className="relative w-full h-full bg-gradient-to-br from-indigo-50/70 to-blue-50/70 rounded-2xl border border-slate-100 overflow-hidden flex flex-col justify-end">
-            <div className="flex items-end justify-between px-10 pb-4 relative z-10">
-              <div className="flex flex-col items-center gap-1.5">
-                <div className="p-3 bg-indigo-600 text-white rounded-xl shadow-md border border-indigo-500 transform hover:scale-105 transition-transform">
-                  <Accessibility className="w-6 h-6" />
-                </div>
-                <span className="text-[10px] font-black text-indigo-700 bg-indigo-50 border border-indigo-200/50 px-2 py-0.5 rounded shadow-sm">휠체어</span>
-              </div>
-
-              <div className="flex flex-col items-center gap-1 pb-3">
-                <div className="flex items-center text-blue-600">
-                  <div className="w-10 h-0.5 bg-blue-300" />
-                  <ArrowRight className="-ml-2 w-4 h-4 stroke-[3]" />
-                </div>
-                <span className="text-[9px] font-black text-slate-400">침대로 이동</span>
-              </div>
-
-              <div className="flex flex-col items-center gap-1.5">
-                <div className="p-3 bg-blue-600 text-white rounded-xl shadow-md border border-blue-500 transform hover:scale-105 transition-transform">
-                  <Bed className="w-6 h-6" />
-                </div>
-                <span className="text-[10px] font-black text-blue-700 bg-blue-50 border border-blue-200/50 px-2 py-0.5 rounded shadow-sm">침대</span>
-              </div>
-            </div>
-            <div className="w-full h-1.5 bg-slate-300/80" />
-          </div>
+          <svg className="w-full h-full" viewBox="0 0 240 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="bg-wtb" x1="0" y1="0" x2="240" y2="120" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#EFF6FF" />
+                <stop offset="1" stopColor="#DBEAFE" />
+              </linearGradient>
+            </defs>
+            <rect width="240" height="120" rx="20" fill="url(#bg-wtb)" />
+            {/* Wheelchair on the left */}
+            <circle cx="65" cy="85" r="16" stroke="#4B5563" strokeWidth="4" />
+            <path d="M47 50 H60 V78 H77" stroke="#374151" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+            <circle cx="60" cy="38" r="6" fill="#60A5FA" />
+            <path d="M60 44 C67 44, 71 50, 71 58 L65 70" stroke="#60A5FA" strokeWidth="4" strokeLinecap="round" />
+            <circle cx="85" cy="92" r="5" fill="#4B5563" />
+            {/* Arrow in middle */}
+            <path d="M105 70 H130 M124 64 L131 70 L124 76" stroke="#2563EB" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+            {/* Bed on the right */}
+            <rect x="155" y="65" width="60" height="30" rx="4" fill="#93C5FD" />
+            <rect x="155" y="60" width="15" height="8" rx="2" fill="#DBEAFE" />
+            <path d="M170 55 C178 55, 178 65, 190 65 L215 65 L215 75 L170 75 Z" fill="#2563EB" />
+            <rect x="160" y="95" width="6" height="10" fill="#4B5563" />
+            <rect x="204" y="95" width="6" height="10" fill="#4B5563" />
+          </svg>
         );
 
       case 'wheelchair-to-toilet':
         return (
-          <div className="relative w-full h-full bg-gradient-to-br from-indigo-50/70 to-purple-50/70 rounded-2xl border border-slate-100 overflow-hidden flex flex-col justify-end">
-            <div className="flex items-end justify-between px-10 pb-4 relative z-10">
-              <div className="flex flex-col items-center gap-1.5">
-                <div className="p-3 bg-indigo-600 text-white rounded-xl shadow-md border border-indigo-500 transform hover:scale-105 transition-transform">
-                  <Accessibility className="w-6 h-6" />
-                </div>
-                <span className="text-[10px] font-black text-indigo-700 bg-indigo-50 border border-indigo-200/50 px-2 py-0.5 rounded shadow-sm">휠체어</span>
-              </div>
-
-              <div className="flex flex-col items-center gap-1 pb-3">
-                <div className="flex items-center text-purple-600">
-                  <div className="w-10 h-0.5 bg-purple-300" />
-                  <ArrowRight className="-ml-2 w-4 h-4 stroke-[3]" />
-                </div>
-                <span className="text-[9px] font-black text-slate-400">변기로 이동</span>
-              </div>
-
-              <div className="flex flex-col items-center gap-1.5">
-                <div className="p-3 bg-purple-600 text-white rounded-xl shadow-md border border-purple-500 transform hover:scale-105 transition-transform">
-                  <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M7 3h10v4H7z" />
-                    <path d="M7 7h10v10a3 3 0 0 1-3 3H10a3 3 0 0 1-3-3V7z" />
-                    <circle cx="12" cy="12" r="2" />
-                  </svg>
-                </div>
-                <span className="text-[10px] font-black text-purple-700 bg-purple-50 border border-purple-200/50 px-2 py-0.5 rounded shadow-sm">변기</span>
-              </div>
-            </div>
-            <div className="w-full h-1.5 bg-slate-300/80" />
-          </div>
+          <svg className="w-full h-full" viewBox="0 0 240 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="bg-wtt" x1="0" y1="0" x2="240" y2="120" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#F5F3FF" />
+                <stop offset="1" stopColor="#FAE8FF" />
+              </linearGradient>
+            </defs>
+            <rect width="240" height="120" rx="20" fill="url(#bg-wtt)" />
+            {/* Wheelchair on the left */}
+            <circle cx="60" cy="85" r="16" stroke="#4B5563" strokeWidth="4" />
+            <path d="M42 50 H55 V78 H72" stroke="#374151" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+            <circle cx="55" cy="38" r="6" fill="#818CF8" />
+            <circle cx="80" cy="92" r="5" fill="#4B5563" />
+            {/* Arrow in middle */}
+            <path d="M105 70 H130 M124 64 L131 70 L124 76" stroke="#A21CAF" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+            {/* Toilet on the right */}
+            <path d="M165 40 H185 V65 H165 Z" fill="#D1D5DB" />
+            <path d="M160 65 H195 V80 C195 90, 185 95, 177 95 H172 C164 95, 160 90, 160 80 Z" fill="#E5E7EB" />
+            <ellipse cx="177" cy="65" rx="15" ry="4" fill="#9CA3AF" />
+            <rect x="180" y="30" width="10" height="10" rx="2" fill="#9CA3AF" />
+          </svg>
         );
 
       case 'bed-to-chair':
         return (
-          <div className="relative w-full h-full bg-gradient-to-br from-blue-50/70 to-emerald-50/70 rounded-2xl border border-slate-100 overflow-hidden flex flex-col justify-end">
-            <div className="flex items-end justify-between px-10 pb-4 relative z-10">
-              <div className="flex flex-col items-center gap-1.5">
-                <div className="p-3 bg-blue-600 text-white rounded-xl shadow-md border border-blue-500 transform hover:scale-105 transition-transform">
-                  <Bed className="w-6 h-6" />
-                </div>
-                <span className="text-[10px] font-black text-blue-700 bg-blue-50 border border-blue-200/50 px-2 py-0.5 rounded shadow-sm">침대</span>
-              </div>
-
-              <div className="flex flex-col items-center gap-1 pb-3">
-                <div className="flex items-center text-emerald-600">
-                  <div className="w-10 h-0.5 bg-emerald-300" />
-                  <ArrowRight className="-ml-2 w-4 h-4 stroke-[3]" />
-                </div>
-                <span className="text-[9px] font-black text-slate-400">의자로 이동</span>
-              </div>
-
-              <div className="flex flex-col items-center gap-1.5">
-                <div className="p-3 bg-emerald-600 text-white rounded-xl shadow-md border border-emerald-500 transform hover:scale-105 transition-transform">
-                  <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M19 12h-14v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6z" />
-                    <path d="M6 12v-6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v6" />
-                  </svg>
-                </div>
-                <span className="text-[10px] font-black text-emerald-700 bg-emerald-50 border border-emerald-200/50 px-2 py-0.5 rounded shadow-sm">의자</span>
-              </div>
-            </div>
-            <div className="w-full h-1.5 bg-slate-300/80" />
-          </div>
+          <svg className="w-full h-full" viewBox="0 0 240 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="bg-btc" x1="0" y1="0" x2="240" y2="120" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#EFF6FF" />
+                <stop offset="1" stopColor="#ECFDF5" />
+              </linearGradient>
+            </defs>
+            <rect width="240" height="120" rx="20" fill="url(#bg-btc)" />
+            {/* Bed on left */}
+            <rect x="25" y="65" width="60" height="30" rx="4" fill="#93C5FD" />
+            <rect x="25" y="60" width="15" height="8" rx="2" fill="#DBEAFE" />
+            <rect x="30" y="95" width="6" height="10" fill="#4B5563" />
+            <rect x="74" y="95" width="6" height="10" fill="#4B5563" />
+            {/* Arrow */}
+            <path d="M105 70 H130 M124 64 L131 70 L124 76" stroke="#059669" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+            {/* Chair on right */}
+            <path d="M165 45 H180 V70 H165 Z" fill="#A7F3D0" />
+            <path d="M160 70 H185 V75 H160 Z" fill="#059669" />
+            <rect x="163" y="75" width="4" height="20" fill="#374151" />
+            <rect x="178" y="75" width="4" height="20" fill="#374151" />
+            <path d="M160 45 V70" stroke="#374151" strokeWidth="4" strokeLinecap="round" />
+          </svg>
         );
 
       case 'caregiver-assist':
         return (
-          <div className="relative w-full h-full bg-gradient-to-br from-indigo-50/60 to-pink-50/60 rounded-2xl border border-slate-100 overflow-hidden flex flex-col justify-end">
-            <div className="flex items-end justify-center gap-10 pb-4 relative z-10">
-              <div className="flex flex-col items-center gap-1.5">
-                <div className="p-3 bg-indigo-650 text-white rounded-full shadow-md">
-                  <Users className="w-5 h-5" />
-                </div>
-                <span className="text-[9px] font-black text-indigo-700 bg-indigo-50 border border-indigo-150 px-2 py-0.5 rounded">보호자</span>
-              </div>
-
-              <div className="p-2.5 bg-white rounded-full shadow-md border border-slate-100 text-rose-500 -mb-1 animate-pulse flex items-center justify-center">
-                <Heart className="w-5 h-5 fill-rose-500" />
-              </div>
-
-              <div className="flex flex-col items-center gap-1.5">
-                <div className="p-3 bg-pink-500 text-white rounded-full shadow-md">
-                  <Accessibility className="w-5 h-5" />
-                </div>
-                <span className="text-[9px] font-black text-pink-700 bg-pink-50 border border-pink-150 px-2 py-0.5 rounded">대상자</span>
-              </div>
-            </div>
-            <div className="w-full h-1.5 bg-slate-250" />
-          </div>
+          <svg className="w-full h-full" viewBox="0 0 240 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="bg-ca" x1="0" y1="0" x2="240" y2="120" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#EEF2F6" />
+                <stop offset="1" stopColor="#E2E8F0" />
+              </linearGradient>
+            </defs>
+            <rect width="240" height="120" rx="20" fill="url(#bg-ca)" />
+            {/* Caregiver (left/taller) */}
+            <circle cx="105" cy="40" r="10" fill="#4F46E5" />
+            <path d="M90 65 C90 55, 120 55, 120 65 V105 H108 V80 H102 V105 H90 Z" fill="#4F46E5" />
+            {/* Recipient (right/shorter) */}
+            <circle cx="135" cy="50" r="8" fill="#EC4899" />
+            <path d="M123 70 C123 62, 147 62, 147 70 V105 H138 V85 H132 V105 H123 Z" fill="#EC4899" />
+            {/* Heart symbol of care */}
+            <path d="M120 28 C120 28, 117 24, 114 26 C111 28, 113 32, 120 36 C127 32, 129 28, 126 26 C123 24, 120 28, 120 28 Z" fill="#EF4444" />
+          </svg>
         );
 
       case 'safety-check':
         return (
-          <div className="relative w-full h-full bg-gradient-to-br from-amber-50/70 to-orange-50/70 rounded-2xl border border-slate-100 overflow-hidden flex flex-col justify-end">
-            <div className="flex flex-col items-center justify-center h-full pb-3 relative z-10 gap-2">
-              <div className="relative">
-                <div className="p-3 bg-amber-500 text-white rounded-2xl shadow-md">
-                  <Lock className="w-6 h-6" />
-                </div>
-                <span className="absolute -bottom-1 -right-1 bg-emerald-500 text-white p-0.5 rounded-full border-2 border-white">
-                  <Check className="w-3.5 h-3.5 stroke-[3.5]" />
-                </span>
-              </div>
-              <span className="text-[10px] font-black text-amber-800 bg-white border border-amber-200/80 px-2.5 py-0.8 rounded shadow-sm">바퀴 잠금 확인</span>
-            </div>
-            <div className="w-full h-1.5 bg-amber-300/60" />
-          </div>
+          <svg className="w-full h-full" viewBox="0 0 240 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="bg-sc" x1="0" y1="0" x2="240" y2="120" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#FEF3C7" />
+                <stop offset="1" stopColor="#FDE68A" />
+              </linearGradient>
+            </defs>
+            <rect width="240" height="120" rx="20" fill="url(#bg-sc)" />
+            {/* Wheel Lock Illustration */}
+            <circle cx="120" cy="60" r="32" stroke="#4B5563" strokeWidth="6" fill="#F3F4F6" />
+            <circle cx="120" cy="60" r="22" stroke="#9CA3AF" strokeWidth="2" strokeDasharray="6 4" />
+            {/* Red Lock lever */}
+            <path d="M96 35 L116 55" stroke="#EF4444" strokeWidth="8" strokeLinecap="round" />
+            <circle cx="96" cy="35" r="6" fill="#DC2626" />
+            {/* Safe Lock text badge */}
+            <rect x="100" y="82" width="40" height="14" rx="7" fill="#10B981" />
+            <path d="M115 89 L118 92 L125 86" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
         );
 
       case 'dizzy-warning':
         return (
-          <div className="relative w-full h-full bg-gradient-to-br from-rose-50/70 to-amber-50/70 rounded-2xl border border-slate-100 overflow-hidden flex flex-col justify-end">
-            <div className="flex flex-col items-center justify-center h-full pb-3 relative z-10 gap-2">
-              <div className="p-3.5 bg-rose-500 text-white rounded-full shadow-md animate-bounce">
-                <AlertTriangle className="w-6 h-6" />
-              </div>
-              <span className="text-[10px] font-black text-rose-800 bg-white border border-rose-200/80 px-2.5 py-0.8 rounded shadow-sm">어지러움 즉시 정지</span>
-            </div>
-            <div className="w-full h-1.5 bg-rose-300/50" />
-          </div>
+          <svg className="w-full h-full" viewBox="0 0 240 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="bg-dw" x1="0" y1="0" x2="240" y2="120" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#FFE4E6" />
+                <stop offset="1" stopColor="#FECDD3" />
+              </linearGradient>
+            </defs>
+            <rect width="240" height="120" rx="20" fill="url(#bg-dw)" />
+            {/* Person dizzy head outline */}
+            <circle cx="120" cy="65" r="20" stroke="#E11D48" strokeWidth="4" fill="white" />
+            {/* Dizzy spirals */}
+            <path d="M108 35 C112 30, 120 30, 124 35 C128 40, 120 45, 126 48" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" fill="none" />
+            <path d="M125 28 C129 23, 137 23, 141 28" stroke="#F59E0B" strokeWidth="1.5" strokeLinecap="round" fill="none" />
+            {/* Big Alert Icon */}
+            <path d="M120 52 V68 M120 76 H120.01" stroke="#E11D48" strokeWidth="4" strokeLinecap="round" />
+          </svg>
         );
 
       case 'express-need':
         return (
-          <div className="relative w-full h-full bg-gradient-to-br from-purple-50/70 to-sky-50/70 rounded-2xl border border-slate-100 overflow-hidden flex flex-col justify-end">
-            <div className="flex items-end justify-center gap-6 pb-4 relative z-10">
-              <div className="flex flex-col items-center gap-1.5">
-                <div className="p-3 bg-purple-600 text-white rounded-2xl shadow-md">
-                  <Accessibility className="w-5 h-5" />
-                </div>
-                <span className="text-[10px] font-black text-purple-700 bg-purple-50 border border-purple-200 px-2 py-0.5 rounded shadow-sm">대상자</span>
-              </div>
-              <div className="bg-white border-2 border-purple-200 rounded-2xl px-3 py-2.5 shadow-md -mb-1 animate-pulse relative">
-                <span className="text-[11px] font-black text-purple-800">"화장실 신호"</span>
-                <div className="absolute -bottom-1 left-4 w-2.5 h-2.5 bg-white border-r-2 border-b-2 border-purple-200 rotate-45" />
-              </div>
-            </div>
-            <div className="w-full h-1.5 bg-slate-250" />
-          </div>
+          <svg className="w-full h-full" viewBox="0 0 240 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="bg-en" x1="0" y1="0" x2="240" y2="120" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#F5F3FF" />
+                <stop offset="1" stopColor="#E0F2FE" />
+              </linearGradient>
+            </defs>
+            <rect width="240" height="120" rx="20" fill="url(#bg-en)" />
+            {/* Person showing express expression */}
+            <circle cx="80" cy="65" r="16" fill="#818CF8" />
+            <path d="M68 95 C68 85, 92 85, 92 95 Z" fill="#818CF8" />
+            {/* Talk bubble */}
+            <path d="M120 35 H180 C188 35, 192 40, 192 48 V65 C192 73, 188 78, 180 78 H140 L125 90 L132 78 H120 C112 78, 108 73, 108 65 V48 C108 40, 112 35, 120 35 Z" fill="white" stroke="#3B82F6" strokeWidth="2" />
+            <text x="150" y="58" fill="#1E40AF" fontSize="11" fontWeight="900" textAnchor="middle">화장실 가고 싶어요</text>
+          </svg>
         );
 
       case 'move-difficulty':
         return (
-          <div className="relative w-full h-full bg-gradient-to-br from-slate-100 to-amber-50/70 rounded-2xl border border-slate-100 overflow-hidden flex flex-col justify-end">
-            <div className="flex items-end justify-center gap-10 pb-4 relative z-10">
-              <div className="flex flex-col items-center gap-1.5">
-                <div className="p-3 bg-slate-600 text-white rounded-2xl shadow-md">
-                  <Footprints className="w-5 h-5" />
-                </div>
-                <span className="text-[10px] font-black text-slate-700 bg-slate-50 border border-slate-200 px-2 py-0.5 rounded shadow-sm">이동 곤란</span>
-              </div>
-              <div className="p-3 bg-amber-500 text-white rounded-full shadow-md animate-pulse mb-1">
-                <AlertTriangle className="w-4 h-4" />
-              </div>
-            </div>
-            <div className="w-full h-1.5 bg-slate-300" />
-          </div>
+          <svg className="w-full h-full" viewBox="0 0 240 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="bg-md" x1="0" y1="0" x2="240" y2="120" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#F1F5F9" />
+                <stop offset="1" stopColor="#E2E8F0" />
+              </linearGradient>
+            </defs>
+            <rect width="240" height="120" rx="20" fill="url(#bg-md)" />
+            {/* Footprints showing slip/stumble */}
+            <ellipse cx="85" cy="75" rx="7" ry="12" fill="#94A3B8" transform="rotate(-25 85 75)" />
+            <ellipse cx="115" cy="55" rx="7" ry="12" fill="#94A3B8" transform="rotate(15 115 55)" />
+            {/* Slippery wave indicator */}
+            <path d="M75 95 Q100 85, 125 95 T175 95" stroke="#F59E0B" strokeWidth="3" strokeLinecap="round" />
+            {/* Alert sign */}
+            <path d="M150 40 L170 75 H130 Z" fill="#EF4444" />
+            <path d="M150 50 V62 M150 68 H150.01" stroke="white" strokeWidth="3" strokeLinecap="round" />
+          </svg>
         );
 
       case 'bedside-toileting':
         return (
-          <div className="relative w-full h-full bg-gradient-to-r from-blue-50/70 to-purple-50/70 rounded-2xl border border-slate-100 overflow-hidden flex flex-col justify-end">
-            <div className="flex items-end justify-between px-14 pb-4 relative z-10">
-              <div className="flex flex-col items-center gap-1.5">
-                <div className="p-2.5 bg-blue-500 text-white rounded-xl shadow-md">
-                  <Bed className="w-4 h-4" />
-                </div>
-                <span className="text-[10px] font-black text-blue-700 bg-blue-50 border border-blue-200 px-2 py-0.5 rounded shadow-sm">침상</span>
-              </div>
-              <div className="w-10 h-px bg-slate-300 pb-2 border-t border-dashed" />
-              <div className="flex flex-col items-center gap-1.5">
-                <div className="p-2.5 bg-purple-500 text-white rounded-xl shadow-md">
-                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <path d="M7 3h10v4H7z" />
-                    <path d="M7 7h10v10a3 3 0 0 1-3 3H10a3 3 0 0 1-3-3V7z" />
-                  </svg>
-                </div>
-                <span className="text-[10px] font-black text-purple-700 bg-purple-50 border border-purple-200 px-2 py-0.5 rounded shadow-sm">간이변기</span>
-              </div>
-            </div>
-            <div className="w-full h-1.5 bg-slate-300" />
-          </div>
+          <svg className="w-full h-full" viewBox="0 0 240 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="bg-bt" x1="0" y1="0" x2="240" y2="120" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#EFF6FF" />
+                <stop offset="1" stopColor="#F5F3FF" />
+              </linearGradient>
+            </defs>
+            <rect width="240" height="120" rx="20" fill="url(#bg-bt)" />
+            {/* Bed part */}
+            <rect x="25" y="65" width="75" height="30" rx="4" fill="#93C5FD" />
+            <rect x="25" y="60" width="15" height="8" rx="2" fill="#DBEAFE" />
+            {/* Bedside Commode Toilet */}
+            <rect x="145" y="60" width="35" height="35" rx="6" fill="#C084FC" />
+            <rect x="140" y="55" width="45" height="6" rx="3" fill="#E9D5FF" />
+            <path d="M148 55 V85 M177 55 V85" stroke="#7E22CE" strokeWidth="3" />
+            <circle cx="162" cy="77" r="10" fill="#7E22CE" />
+          </svg>
         );
 
       case 'clean-after':
         return (
-          <div className="relative w-full h-full bg-gradient-to-br from-emerald-50/70 to-sky-50/70 rounded-2xl border border-slate-100 overflow-hidden flex flex-col justify-end">
-            <div className="flex flex-col items-center justify-center h-full pb-3 relative z-10 gap-2">
-              <div className="p-3.5 bg-emerald-500 text-white rounded-full shadow-md relative">
-                <Droplet className="w-6 h-6 fill-sky-200 text-sky-200" />
-                <span className="absolute -bottom-1 -right-1 bg-teal-500 text-white p-0.5 rounded-full border border-white">
-                  <Check className="w-3.5 h-3.5 stroke-[3.5]" />
-                </span>
-              </div>
-              <span className="text-[10px] font-black text-emerald-800 bg-white border border-emerald-250 px-2.5 py-0.8 rounded shadow-sm">세정 완료</span>
-            </div>
-            <div className="w-full h-1.5 bg-emerald-350/50" />
-          </div>
+          <svg className="w-full h-full" viewBox="0 0 240 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="bg-caft" x1="0" y1="0" x2="240" y2="120" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#ECFDF5" />
+                <stop offset="1" stopColor="#D1FAE5" />
+              </linearGradient>
+            </defs>
+            <rect width="240" height="120" rx="20" fill="url(#bg-caft)" />
+            {/* Water bubbles & sparkles */}
+            <circle cx="85" cy="55" r="10" fill="#3B82F6" opacity="0.6" />
+            <circle cx="105" cy="75" r="14" fill="#60A5FA" opacity="0.5" />
+            <circle cx="135" cy="45" r="8" fill="#93C5FD" opacity="0.7" />
+            <path d="M150 65 L155 75 L165 70 L157 82 L165 92 L155 87 L150 97 L145 87 L135 92 L143 82 L135 70 L145 75 Z" fill="#F59E0B" />
+            {/* Big green check */}
+            <circle cx="120" cy="60" r="24" fill="#10B981" />
+            <path d="M110 60 L117 67 L130 52" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
         );
 
       case 'caregiver-prep':
         return (
-          <div className="relative w-full h-full bg-gradient-to-r from-teal-50/70 to-sky-50/70 rounded-2xl border border-slate-100 overflow-hidden flex flex-col justify-end">
-            <div className="flex items-end justify-center gap-8 pb-4 relative z-10">
-              <div className="flex flex-col items-center gap-1.5">
-                <div className="p-3 bg-teal-500 text-white rounded-2xl shadow-md">
-                  <Users className="w-5 h-5" />
-                </div>
-                <span className="text-[10px] font-black text-teal-700 bg-teal-50 border border-teal-200 px-2 py-0.5 rounded shadow-sm">준비 완료</span>
-              </div>
-              <div className="flex gap-2 pb-1">
-                <div className="w-10 h-10 rounded-xl bg-white border border-slate-200 shadow-md flex items-center justify-center text-sky-500">
-                  <Droplet className="w-5 h-5" />
-                </div>
-                <div className="w-10 h-10 rounded-xl bg-white border border-slate-200 shadow-md flex items-center justify-center text-teal-500 animate-pulse">
-                  <Smile className="w-5 h-5" />
-                </div>
-              </div>
-            </div>
-            <div className="w-full h-1.5 bg-slate-300" />
-          </div>
+          <svg className="w-full h-full" viewBox="0 0 240 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="bg-cgp" x1="0" y1="0" x2="240" y2="120" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#F0FDFA" />
+                <stop offset="1" stopColor="#CCFBF1" />
+              </linearGradient>
+            </defs>
+            <rect width="240" height="120" rx="20" fill="url(#bg-cgp)" />
+            {/* Caregiver explaining */}
+            <circle cx="95" cy="45" r="10" fill="#0D9488" />
+            <path d="M80 70 C80 60, 110 60, 110 70 V100 H80 Z" fill="#0D9488" />
+            {/* Recipient smiling */}
+            <circle cx="145" cy="55" r="8" fill="#0F766E" />
+            <path d="M133 78 C133 70, 157 70, 157 78 V100 H133 Z" fill="#0F766E" />
+            {/* Explanation lines */}
+            <path d="M115 50 Q122 45, 130 50" stroke="#0D9488" strokeWidth="2" strokeDasharray="3 2" strokeLinecap="round" />
+          </svg>
         );
 
       case 'privacy-protection':
         return (
-          <div className="relative w-full h-full bg-gradient-to-br from-indigo-50/70 to-purple-50/70 rounded-2xl border border-slate-100 overflow-hidden flex flex-col justify-end">
-            <div className="flex items-end justify-center gap-8 pb-4 relative z-10">
-              <div className="flex flex-col items-center gap-1.5">
-                <div className="p-3 bg-indigo-600 text-white rounded-2xl shadow-md">
-                  <EyeOff className="w-5 h-5" />
-                </div>
-                <span className="text-[10px] font-black text-indigo-700 bg-indigo-50 border border-indigo-200 px-2 py-0.5 rounded shadow-sm">프라이버시</span>
-              </div>
-              <div className="w-2 h-14 bg-purple-300/80 rounded-full border border-purple-400/30" />
-              <div className="flex flex-col items-center gap-1.5 opacity-40">
-                <div className="p-2.5 bg-slate-400 text-white rounded-xl">
-                  <Accessibility className="w-4 h-4" />
-                </div>
-                <span className="text-[9px] font-semibold text-slate-500">가림막</span>
-              </div>
-            </div>
-            <div className="w-full h-1.5 bg-slate-300" />
-          </div>
+          <svg className="w-full h-full" viewBox="0 0 240 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="bg-pp" x1="0" y1="0" x2="240" y2="120" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#F5F3FF" />
+                <stop offset="1" stopColor="#E9D5FF" />
+              </linearGradient>
+            </defs>
+            <rect width="240" height="120" rx="20" fill="url(#bg-pp)" />
+            {/* Partition Screen */}
+            <rect x="75" y="35" width="10" height="70" rx="2" fill="#7E22CE" />
+            <rect x="90" y="30" width="12" height="75" rx="2" fill="#9333EA" />
+            <rect x="107" y="35" width="10" height="70" rx="2" fill="#7E22CE" />
+            {/* Hidden toilet behind screen */}
+            <rect x="145" y="60" width="30" height="30" rx="4" fill="#D1D5DB" opacity="0.6" />
+            {/* Eye cover icon representing privacy */}
+            <path d="M135 48 C145 42, 165 42, 175 48" stroke="#7E22CE" strokeWidth="3" strokeLinecap="round" />
+            <path d="M142 55 L138 60 M155 56 L155 62 M168 55 L172 60" stroke="#7E22CE" strokeWidth="2" strokeLinecap="round" />
+          </svg>
         );
 
       case 'hygiene-manage':
         return (
-          <div className="relative w-full h-full bg-gradient-to-br from-teal-50/70 to-emerald-50/70 rounded-2xl border border-slate-100 overflow-hidden flex flex-col justify-end">
-            <div className="flex items-end justify-center gap-10 pb-4 relative z-10">
-              <div className="flex flex-col items-center gap-1.5">
-                <div className="p-3 bg-teal-500 text-white rounded-2xl shadow-md">
-                  <Trash2 className="w-5 h-5" />
-                </div>
-                <span className="text-[10px] font-black text-teal-700 bg-teal-50 border border-teal-200 px-2 py-0.5 rounded shadow-sm">소독 수거</span>
-              </div>
-              <div className="w-10 h-10 rounded-full bg-white border border-emerald-100 flex items-center justify-center text-emerald-550 shadow-md animate-bounce mb-1">
-                <Check className="w-5 h-5 stroke-[3.5]" />
-              </div>
-            </div>
-            <div className="w-full h-1.5 bg-slate-300" />
-          </div>
+          <svg className="w-full h-full" viewBox="0 0 240 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="bg-hm" x1="0" y1="0" x2="240" y2="120" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#F0FDF4" />
+                <stop offset="1" stopColor="#DCFCE7" />
+              </linearGradient>
+            </defs>
+            <rect width="240" height="120" rx="20" fill="url(#bg-hm)" />
+            {/* Clean sparkles */}
+            <path d="M120 40 L123 48 L131 51 L123 54 L120 62 L117 54 L109 51 L117 48 Z" fill="#34D399" />
+            <path d="M150 65 L152 70 L157 72 L152 74 L150 79 L148 74 L143 72 L148 70 Z" fill="#34D399" opacity="0.8" />
+            {/* Disinfected garbage bin or device */}
+            <rect x="80" y="50" width="28" height="40" rx="4" fill="#65A30D" />
+            <rect x="76" y="45" width="36" height="6" rx="2" fill="#84CC16" />
+            {/* Check overlay */}
+            <circle cx="120" cy="80" r="16" fill="#15803D" />
+            <path d="M113 80 L118 85 L127 74" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
         );
 
       default:
@@ -371,8 +360,8 @@ export default function CareSceneIllustration({ type, size = 'md' }: CareSceneIl
   };
 
   return (
-    <div className={`${getDimensionClass()} shrink-0`}>
-      {renderScene()}
+    <div className={`${getDimensionClass()} shrink-0 overflow-hidden flex items-center justify-center p-1 rounded-2xl`}>
+      {renderSVG()}
     </div>
   );
 }
